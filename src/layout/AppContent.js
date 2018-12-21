@@ -5,7 +5,7 @@ import ResultList from "../components/ResultList";
 
 const styles = {
     main: {
-        height: "100vh",
+        height: "100%",
         width: "100vw",
         display: "flex",
         flexFlow: "column nowrap",

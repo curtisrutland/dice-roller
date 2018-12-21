@@ -1,8 +1,10 @@
 import React from "react";
 import { Drawer, List, ListItem, ListItemText, ListItemIcon } from "../mui";
-import { DeleteIcon } from "../mui/icons";
+import { DeleteIcon, InfoIcon } from "../mui/icons";
 import { rollActions } from "../../store";
 import { connect } from "react-redux";
+
+const appVer = process.env.REACT_APP_VERSION || "v0";
 
 const PopupMenu = ({ open, onClose, clearRolls }) => {
     const clearRollsClicked = () => {
@@ -17,6 +19,12 @@ const PopupMenu = ({ open, onClose, clearRolls }) => {
                             <DeleteIcon />
                         </ListItemIcon>
                         <ListItemText primary="Clear All Rolls" />
+                    </ListItem>
+                    <ListItem button onClick={() => alert(`App Version: ${appVer}`)}>
+                    <ListItemIcon>
+                        <InfoIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="App Info" />
                     </ListItem>
                 </List>
             </div>
