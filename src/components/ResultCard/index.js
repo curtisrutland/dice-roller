@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, Typography, withStyles, CardActions, IconButton, SvgIcon } from "../mui";
+import { Card, CardContent, Typography, withStyles, CardActions, IconButton } from "../mui";
 import SelfUpdatingTimestamp from "../SelfUpdatingTimestamp";
 import Badge from "../Badge";
 import styles from "./style";
@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { rollActions } from "../../store";
 import pink from '@material-ui/core/colors/pink';
-import { ReactComponent as DiceIcon } from "../../assets/icons/dice.svg";
+import { DiceIcon } from "../icons";
 
 function createBadges(resultGroups) {
     let badges = [];
@@ -45,7 +45,6 @@ const ResultCard = (props) => {
                     <div className={classes.badges}>
                         {createBadges(results)}
                     </div>
-
                 </CardContent>
                 <CardContent className={classes.total}>
                     <Typography className={classes.totalText}>{total}</Typography>
@@ -63,9 +62,7 @@ const ResultCard = (props) => {
                         {icon}
                     </IconButton>
                     <IconButton onClick={doReroll}>
-                        <SvgIcon>
-                            <DiceIcon />
-                        </SvgIcon>
+                        <DiceIcon />
                     </IconButton>
                 </div>
             </CardActions>

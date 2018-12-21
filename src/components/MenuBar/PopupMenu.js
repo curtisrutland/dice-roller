@@ -9,12 +9,15 @@ import { connect } from "react-redux";
 import red from "@material-ui/core/colors/red";
 import pink from "@material-ui/core/colors/pink";
 import { getFavorites } from "../../api/storage";
+import { GithubIcon } from "../icons";
 
 
 const appVer = process.env.REACT_APP_VERSION || "v0";
 const appMessage = process.env.REACT_APP_VERSION_MESSAGE || "No new messages.";
+const projectUrl = process.env.REACT_APP_PROJECT_HOMEPAGE || "https://google.com";
 
 const doAlert = () => alert(`App Version: ${appVer}\n${appMessage}`);
+const goToProject = () => window.open(projectUrl, "_blank");
 
 const PopupMenu = ({ open, onClose, clearRolls, clearFavorites, roll }) => {
     const favorites = getFavorites();
@@ -60,6 +63,12 @@ const PopupMenu = ({ open, onClose, clearRolls, clearFavorites, roll }) => {
                             <InfoIcon />
                         </ListItemIcon>
                         <ListItemText primary="App Info" />
+                    </ListItem>
+                    <ListItem button onClick={goToProject}>
+                        <ListItemIcon>
+                            <GithubIcon />                            
+                        </ListItemIcon>
+                        <ListItemText primary="Project Homepage" />
                     </ListItem>
                 </List>
             </div>

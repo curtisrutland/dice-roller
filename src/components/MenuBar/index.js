@@ -1,10 +1,10 @@
 import React from "react";
 import {
     AppBar, Toolbar, IconButton,
-    withStyles, InputBase, SvgIcon
+    withStyles, InputBase
 } from "../mui";
 import { MoreIcon } from "../mui/icons";
-import { ReactComponent as DiceIcon } from "../../assets/icons/dice.svg";
+import { DiceIcon } from "../icons";
 import { rollActions } from "../../store";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -59,9 +59,7 @@ class MenuBar extends React.Component {
                     </div>
                     <div className={classes.marginLeft}>
                         <IconButton color="inherit" onClick={this.handleAddRoll}>
-                            <SvgIcon>
-                                <DiceIcon />
-                            </SvgIcon>
+                            <DiceIcon />
                         </IconButton>
                         <IconButton color="inherit" onClick={this.handleMenuClick}>
                             <MoreIcon />
