@@ -12,6 +12,9 @@ import { getFavorites } from "../../api/storage";
 
 
 const appVer = process.env.REACT_APP_VERSION || "v0";
+const appMessage = process.env.REACT_APP_VERSION_MESSAGE || "No new messages.";
+
+const doAlert = () => alert(`App Version: ${appVer}\n${appMessage}`);
 
 const PopupMenu = ({ open, onClose, clearRolls, clearFavorites, roll }) => {
     const favorites = getFavorites();
@@ -52,7 +55,7 @@ const PopupMenu = ({ open, onClose, clearRolls, clearFavorites, roll }) => {
                         </ListItemIcon>
                         <ListItemText primary="Clear All Rolls" />
                     </ListItem>
-                    <ListItem button onClick={() => alert(`App Version: ${appVer}`)}>
+                    <ListItem button onClick={doAlert}>
                         <ListItemIcon>
                             <InfoIcon />
                         </ListItemIcon>
