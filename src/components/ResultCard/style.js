@@ -24,7 +24,7 @@ export default theme => ({
     timestamp: {
         fontSize: ".5rem",
         fontStyle: "italic",
-        textAlign: "center"
+        textAlign: "left"
     },
     badges: {
         flex: 1,
@@ -36,5 +36,9 @@ export default theme => ({
     actions: {
         paddingTop: 0,
         paddingBottom: 0
+    },
+    grow:{
+        flexGrow: 1,
+        justifyContent: "flex-end"
     }
 });

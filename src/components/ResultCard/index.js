@@ -1,12 +1,14 @@
 import React from "react";
-import { Card, CardContent, Typography, withStyles, CardActions, IconButton } from "../mui";
+import { Card, CardContent, Typography, withStyles, CardActions, IconButton, SvgIcon } from "../mui";
 import SelfUpdatingTimestamp from "../SelfUpdatingTimestamp";
 import Badge from "../Badge";
 import styles from "./style";
-import { RefreshIcon, FavoriteIcon } from "../mui/icons";
+import { FavoriteIcon, FavoriteFilledIcon, DeleteOutlineIcon } from "../mui/icons";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { rollActions } from "../../store";
+import pink from '@material-ui/core/colors/pink';
+import { ReactComponent as DiceIcon } from "../../assets/icons/dice.svg";
 
 function createBadges(resultGroups) {
     let badges = [];
@@ -25,9 +27,16 @@ function createBadges(resultGroups) {
     return badges;
 }
 
-const ResultCard = ({ classes, rollResult, reroll }) => {
-    const { parsedExpression, total, results, timestamp } = rollResult;
+const ResultCard = (props) => {
+    const { classes, rollResult, reroll, deleteRoll, setFavorite, unsetFavorite } = props;
+    const { parsedExpression, total, results, timestamp, favorite = false } = rollResult;
     const doReroll = () => reroll(parsedExpression);
+    const doDelete = () => deleteRoll(timestamp);
+    const favoriteAction = favorite
+        ? () => unsetFavorite(parsedExpression)
+        : () => setFavorite(parsedExpression);
+
+    const icon = favorite ? <FavoriteFilledIcon nativeColor={pink[300]} /> : <FavoriteIcon />
     return (
         <Card className={classes.card}>
             <div className={classes.content}>
@@ -43,17 +52,24 @@ const ResultCard = ({ classes, rollResult, reroll }) => {
                 </CardContent>
             </div>
             <CardActions className={classes.actions}>
-                <IconButton>
-                    <FavoriteIcon />
-                </IconButton>
-                <div style={{ flexGrow: 1, justifyContent: "center" }}>
+                <div className={classes.grow}>
                     <SelfUpdatingTimestamp className={classes.timestamp} timestamp={timestamp} />
                 </div>
-                <IconButton onClick={doReroll}>
-                    <RefreshIcon />
-                </IconButton>
+                <div>
+                    <IconButton onClick={doDelete}>
+                        <DeleteOutlineIcon />
+                    </IconButton>
+                    <IconButton onClick={favoriteAction}>
+                        {icon}
+                    </IconButton>
+                    <IconButton onClick={doReroll}>
+                        <SvgIcon>
+                            <DiceIcon />
+                        </SvgIcon>
+                    </IconButton>
+                </div>
             </CardActions>
-        </Card>
+        </Card >
     )
 };
 
@@ -61,6 +77,15 @@ function mapDispatch(dispatch) {
     return {
         reroll(expression) {
             return dispatch(rollActions.rollExpression(expression));
+        },
+        deleteRoll(timestamp) {
+            return dispatch(rollActions.deleteRoll(timestamp))
+        },
+        setFavorite(expression) {
+            return dispatch(rollActions.setFavorite(expression));
+        },
+        unsetFavorite(expression) {
+            return dispatch(rollActions.unsetFavorite(expression));
         }
     }
 };

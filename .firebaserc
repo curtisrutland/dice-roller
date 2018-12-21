@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "dice-exp-parser": "dice-exp-parser"
+  }
+}
